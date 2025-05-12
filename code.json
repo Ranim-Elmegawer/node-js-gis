@@ -1,0 +1,464 @@
+{
+	"info": {
+		"_postman_id": "YOUR_UNIQUE_COLLECTION_ID",
+		"name": "LocationCheckin API",
+		"description": "API for managing organizations, employees, and geo-fenced attendance.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Organizations",
+			"item": [
+				{
+					"name": "Create Organization",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"TechCorp HQ\",\n  \"location\": {\n    \"type\": \"Point\",\n    \"coordinates\": [-73.9857, 40.7484] \n  }\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/organizations",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"organizations"
+							]
+						},
+						"description": "Creates a new organization. Replace `{{baseUrl}}` with your API's base URL (e.g., http://localhost:3000)."
+					},
+					"response": []
+				},
+				{
+					"name": "List All Organizations",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/organizations",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"organizations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Organization by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/organizations/{{organizationId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"organizations",
+								"{{organizationId}}"
+							]
+						},
+						"description": "Replace `{{organizationId}}` with an actual ID from a created organization."
+					},
+					"response": []
+				},
+				{
+					"name": "Update Organization",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"TechCorp Global\",\n  \"location\": {\n    \"type\": \"Point\",\n    \"coordinates\": [-73.9800, 40.7500]\n  }\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/organizations/{{organizationId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"organizations",
+								"{{organizationId}}"
+							]
+						},
+						"description": "Replace `{{organizationId}}` with an actual ID."
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Organization",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/organizations/{{organizationIdToDelete}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"organizations",
+								"{{organizationIdToDelete}}"
+							]
+						},
+						"description": "Replace `{{organizationIdToDelete}}` with an actual ID of an organization you want to delete (be careful!)."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Employees",
+			"item": [
+				{
+					"name": "Create Employee",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Jane Doe\",\n  \"employeeId\": \"E001\",\n  \"organizationId\": \"{{createdOrganizationId}}\" \n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/employees",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"employees"
+							]
+						},
+						"description": "Replace `{{createdOrganizationId}}` with the _id of an organization you created earlier."
+					},
+					"response": []
+				},
+				{
+					"name": "List All Employees",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/employees",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"employees"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Employee by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/employees/{{employeeId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"employees",
+								"{{employeeId}}"
+							]
+						},
+						"description": "Replace `{{employeeId}}` with an actual employee's MongoDB _id."
+					},
+					"response": []
+				},
+				{
+					"name": "Update Employee",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Janet Doe\",\n  \"employeeId\": \"E001-UPDATED\",\n  \"organizationId\": \"{{anotherOrganizationId}}\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/employees/{{employeeIdToUpdate}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"employees",
+								"{{employeeIdToUpdate}}"
+							]
+						},
+						"description": "Replace `{{employeeIdToUpdate}}` and optionally `{{anotherOrganizationId}}`."
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Employee",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/employees/{{employeeIdToDelete}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"employees",
+								"{{employeeIdToDelete}}"
+							]
+						},
+						"description": "Replace `{{employeeIdToDelete}}`."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Attendance",
+			"item": [
+				{
+					"name": "Employee Check-in (Within Range)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"employeeId\": \"E001\", \n  \"location\": {\n    \"type\": \"Point\",\n    \"coordinates\": [-73.9858, 40.7485] \n  }\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/attendance/checkin",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"attendance",
+								"checkin"
+							]
+						},
+						"description": "Use an `employeeId` you created. Adjust coordinates to be near its organization."
+					},
+					"response": []
+				},
+				{
+					"name": "Employee Check-in (Out of Range)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"employeeId\": \"E001\",\n  \"location\": {\n    \"type\": \"Point\",\n    \"coordinates\": [-70.0000, 40.0000] \n  }\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/attendance/checkin",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"attendance",
+								"checkin"
+							]
+						},
+						"description": "Use coordinates far from the organization to test rejection."
+					},
+					"response": []
+				},
+				{
+					"name": "Employee Check-out",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"employeeId\": \"E001\", \n  \"location\": {\n    \"type\": \"Point\",\n    \"coordinates\": [-73.9859, 40.7486]\n  }\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/attendance/checkout",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"attendance",
+								"checkout"
+							]
+						},
+						"description": "Ensure the employee is currently checked in."
+					},
+					"response": []
+				},
+				{
+					"name": "Get Attendance for Employee",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/attendance/employee/{{employeeMongoId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"attendance",
+								"employee",
+								"{{employeeMongoId}}"
+							]
+						},
+						"description": "Replace `{{employeeMongoId}}` with the MongoDB _id of an employee."
+					},
+					"response": []
+				},
+				{
+					"name": "Get Today's Attendance for Employee",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/attendance/today/{{employeeMongoId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"attendance",
+								"today",
+								"{{employeeMongoId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List All Attendance Records (Admin)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/attendance",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"attendance"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Check if Employee is Within Range (Optional)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/attendance/within-range?lat=40.7485&lng=-73.9858&employeeId=E001",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"attendance",
+								"within-range"
+							],
+							"query": [
+								{
+									"key": "lat",
+									"value": "40.7485"
+								},
+								{
+									"key": "lng",
+									"value": "-73.9858"
+								},
+								{
+									"key": "employeeId",
+									"value": "E001"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:3000",
+			"type": "string"
+		},
+		{
+			"key": "organizationId",
+			"value": "YOUR_ORGANIZATION_ID_HERE_AFTER_CREATION",
+			"type": "string"
+		},
+		{
+			"key": "createdOrganizationId",
+			"value": "YOUR_ORGANIZATION_ID_HERE_AFTER_CREATION",
+			"type": "string"
+		},
+		{
+			"key": "organizationIdToDelete",
+			"value": "ID_OF_ORG_TO_DELETE",
+			"type": "string"
+		},
+		{
+			"key": "employeeId",
+			"value": "YOUR_EMPLOYEE_MONGO_ID_HERE",
+			"type": "string"
+		},
+		{
+			"key": "employeeMongoId",
+			"value": "YOUR_EMPLOYEE_MONGO_ID_HERE",
+			"type": "string"
+		},
+		{
+			"key": "employeeIdToUpdate",
+			"value": "ID_OF_EMP_TO_UPDATE",
+			"type": "string"
+		},
+		{
+			"key": "employeeIdToDelete",
+			"value": "ID_OF_EMP_TO_DELETE",
+			"type": "string"
+		},
+		{
+			"key": "anotherOrganizationId",
+			"value": "ID_OF_ANOTHER_ORG_FOR_REASSIGNMENT",
+			"type": "string"
+		}
+	]
+}
